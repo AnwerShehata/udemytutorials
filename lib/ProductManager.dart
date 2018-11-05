@@ -4,35 +4,40 @@ import './Products.dart';
 
     class ProductManager extends StatefulWidget {
       _BirdState createState() => new _BirdState();
+
+      final String startingProduct;
+      ProductManager(this.startingProduct);
+
     }
 
     class _BirdState extends State<ProductManager> {
+
+      List<String> _products = [];
+
+      @override
+  void initState() {
+        _products.add(widget.startingProduct);
+    super.initState();
+  }
+
+
+
       @override
       Widget build(BuildContext context) {
-
-        List<String> _products = ['Food Tester'];
-
-        return new Column(
-          children: <Widget>[
-
-        Container(
-        margin: EdgeInsets.all(10.0),
-        alignment: Alignment.topCenter,
-        child: RaisedButton(
-        child: new Text("Add product"),
-        onPressed: (){
-        setState(() {
-        _products.add("Anwer");
-        });
-        })
-
-        ),
-
-            Products(_products),
-
-
-
-
+        return Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(10.0),
+              child: RaisedButton(
+                onPressed: () {
+                  setState(() {
+                    _products.add(widget.startingProduct);
+                  });
+                },
+                child: Text('Add Product'),
+              ),
+            ),
+            Products(_products)
           ],
         );
 

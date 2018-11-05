@@ -19,10 +19,9 @@ class MyApp extends StatelessWidget{
           elevation: 0.0,
           title: Text("App"),),
 
+        
+        body: ProductManager("anwer shehaya"),
 
-        //----------Body---------------------
-        body: ProductManager(),
-        //
 
 
 

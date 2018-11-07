@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import './Pages/ProductsPage.dart';
+import './product_manager.dart';
 
 class Products extends StatelessWidget {
-  final List<String> products;
+
+  final List<Map<String , String>> products;
 
   Products([this.products = const []]) {
     print('[Products Widget] Constructor');
@@ -9,13 +12,36 @@ class Products extends StatelessWidget {
   
   Widget _buidProductItem(BuildContext context , int index){
     return Card(
-      elevation: 1.0,
       child: Column(
         children: <Widget>[
-          Image.network("https://cdn.pixabay.com/photo/2018/10/19/20/51/walnut-3759573__480.jpg",fit: BoxFit.cover,),
+
+          //==== Images Post
+          Image.network(products[index]["image"],fit: BoxFit.cover,),
+
+          //==== Text Title Post
           Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Text(products[index]),
+            padding: const EdgeInsets.only(top: 10.0),
+            child: Text(products[index]["title"]),
+          ),
+
+          //===== RaisedButton
+          ButtonBar(
+            alignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton(
+                color: Colors.amber,
+                padding: EdgeInsets.symmetric(horizontal: 30.0),
+                shape: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+                child: Text("Details"),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => ProductsPage(
+                        products[index]['title'], products[index]['image']),
+                  ),
+                ),
+                ),
+            ],
           ),
         ],
       ),
@@ -30,9 +56,6 @@ class Products extends StatelessWidget {
         itemCount: products.length,
       );
     }
-/*    else{
-      productCard = Center(child: new Text("No Pproduct Found Please add Some"),);
-    }*/
 
 else{
   productCard =Container();

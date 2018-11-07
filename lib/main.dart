@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import './product_manager.dart';
+import './Pages/HomePage.dart';
+import './AppTest/MasterApp.dart';
 
 void main()  {
   runApp(MyApp());}
@@ -12,10 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('EasyList'),
-        ),
-        body: ProductManager(),
+
+        body: HomePage(),
+
       ),
     );
   }

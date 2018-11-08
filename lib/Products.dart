@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import './Pages/ProductsPage.dart';
+import './Pages/Detils_Products.dart';
 import './product_manager.dart';
 
 class Products extends StatelessWidget {
 
   final List<Map<String , String>> products;
+  final Function deleteProduct;
 
-  Products([this.products = const []]) {
+  Products(this.products ,{this.deleteProduct}) {
     print('[Products Widget] Constructor');
   }
   
@@ -33,13 +34,14 @@ class Products extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 30.0),
                 shape: OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
                 child: Text("Details"),
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => ProductsPage(
-                        products[index]['title'], products[index]['image']),
-                  ),
+                onPressed: () => Navigator.push<bool>(context, MaterialPageRoute(
+                  builder: (BuildContext context) => Detils_Products(
+                        products[index]["title"], products[index]["image"]
+                    ),
                 ),
+                ).then((bool value){
+                  if(value){ deleteProduct(index); }
+                }),
                 ),
             ],
           ),
